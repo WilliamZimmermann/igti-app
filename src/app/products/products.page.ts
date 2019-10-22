@@ -33,16 +33,19 @@ export class ProductsPage implements OnInit {
   /**
    * Method used to Add a new Product to our Array
    */
-  private async addItem() {
+  private async saveItem() {
     // Minimal of two characters
     if (this.product.title.length > 2) {
-      this.productsList.push({
-        id: this.getID(),
-        title: this.product.title,
-      });
-      this.message = {
-        type: "success",
-        content: "Produto cadastrado com sucesso."
+      // It's a new Item
+      if (this.product.id === 0) {
+        this.addItem();
+      } else {
+        this.editItem();
+      }
+      // Clean product object
+      this.product = {
+        title: '',
+        id: 0
       };
     } else {
       this.message = {
@@ -50,7 +53,30 @@ export class ProductsPage implements OnInit {
         content: "Precisa ter no mínimo 2 caracteres."
       };
     }
-    console.log("Lit of Products ", this.productsList);
+  }
+
+  /**
+   * Method used to save a new Item
+   */
+  private addItem() {
+    this.productsList.push({
+      id: this.getID(),
+      title: this.product.title,
+    });
+    this.message = {
+      type: "success",
+      content: "Produto cadastrado com sucesso."
+    };
+  }
+
+  private editItem(){
+    const productIndex = this.productsList
+    .findIndex((product) => product.id === this.product.id);
+    this.productsList[productIndex].title = this.product.title;
+    this.message = {
+      type: "success",
+      content: "Produto editado com sucesso!"
+    };
   }
 
   /**
@@ -64,6 +90,16 @@ export class ProductsPage implements OnInit {
       type: "success",
       content: "Produto removido com sucesso!"
     };
+  }
+
+  /**
+   * This method get the selected Item and populate all necessary fields
+   * @param itemId to be edited
+   */
+  private startEdition(itemId: number) {
+    const productIndex = this.productsList
+    .findIndex((product) => product.id === itemId);
+    this.product = this.productsList[productIndex];
   }
 
   /**
