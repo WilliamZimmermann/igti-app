@@ -20,7 +20,7 @@
       <ion-item *ngFor="let item of productsList">
         <ion-label>{{item.title}}</ion-label>
         <ion-badge slot="end" color="warning">Editar</ion-badge>
-        <ion-badge slot="end" color="danger">Remover</ion-badge>
+        <ion-button color="danger" (click)="removeItem(item.id)">Remover</ion-button>
       </ion-item>
     </ion-list>
 </ion-content>
