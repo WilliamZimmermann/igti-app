@@ -53,9 +53,18 @@ export class ProductsPage implements OnInit {
     console.log("Lit of Products ", this.productsList);
   }
 
-  // private async removeItem(itemId: number){
-  //   console.log(itemId);
-  // }
+  /**
+   * This method removes selected item from List
+   * @param itemId to be deleted
+   */
+  private async removeItem(itemId: number) {
+    const indexToRemove = this.productsList.findIndex((product) => product.id === itemId);
+    this.productsList.splice(indexToRemove, 1);
+    this.message = {
+      type: "success",
+      content: "Produto removido com sucesso!"
+    };
+  }
 
   /**
    * This method checks what was the last grather ID at the Product List
