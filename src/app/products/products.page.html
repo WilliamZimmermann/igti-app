@@ -11,7 +11,7 @@
     <ion-item>
       <ion-label position="floating">Nome do Produto</ion-label>
       <ion-input id="product_name" name="product_name" [(ngModel)]="product.title" clearInput="true" minlength="2" required="true"></ion-input>
-      <ion-button color="primary" (click)="addItem()">Adicionar</ion-button>
+      <ion-button color="primary" (click)="saveItem()">Salvar</ion-button>
     </ion-item>
     <ion-item>
       <h2>Lista de Produtos</h2>
@@ -19,7 +19,7 @@
     <ion-list>
       <ion-item *ngFor="let item of productsList">
         <ion-label>{{item.title}}</ion-label>
-        <ion-badge slot="end" color="warning">Editar</ion-badge>
+        <ion-button color="warning" (click)="startEdition(item.id)">Editar</ion-button>
         <ion-button color="danger" (click)="removeItem(item.id)">Remover</ion-button>
       </ion-item>
     </ion-list>
